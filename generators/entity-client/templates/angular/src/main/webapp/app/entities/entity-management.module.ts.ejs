@@ -27,11 +27,11 @@ import { <%= entityAngularName %>UpdateComponent } from './<%= entityFileName %>
 import { <%= entityAngularName %>DeleteDialogComponent } from './<%= entityFileName %>-delete-dialog.component';
 <%_ } _%>
 import { <%= entityInstance %>Route } from './<%= entityFileName %>.route';
-
+import {NgxQRCodeModule} from 'ngx-qrcode2';    /* add the qrcode library to Module.ts */
 @NgModule({
     imports: [
         <%= angularXAppName %>SharedModule,
-        RouterModule.forChild(<%= entityInstance %>Route)
+        RouterModule.forChild(<%= entityInstance %>Route) , NgxQRCodeModule
     ],
     declarations: [
         <%= entityAngularName %>Component,

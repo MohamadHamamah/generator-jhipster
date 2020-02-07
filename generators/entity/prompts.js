@@ -692,6 +692,23 @@ function askForField(done) {
             default: 0
         },
         {
+            when: response => response.fieldAdd === true && response.fieldType === ('String' || 'Integer' || 'Long' || 'Float' || 'Double') ,
+            type: 'String',
+            name: 'qrCode',
+            message: 'do you want to add QR-Code?',
+            choices: [
+                {
+                    value: 'yes',
+                    name: 'Yes'
+                },
+                {
+                    value: 'no',
+                    name: 'No'
+                },
+            ],
+            default: 'no'
+        },
+        {
             when: response => response.fieldAdd === true && response.fieldType === 'byte[]',
             type: 'list',
             name: 'fieldTypeBlobContent',
@@ -875,6 +892,7 @@ function askForField(done) {
                 fieldName: props.fieldName,
                 fieldType: props.fieldType,
                 fieldTypeBlobContent: props.fieldTypeBlobContent,
+                qrCode: props.qrCode, // add qrCode to fields
                 fieldValues: props.fieldValues,
                 fieldValidateRules: props.fieldValidateRules,
                 fieldValidateRulesMinlength: props.fieldValidateRulesMinlength,

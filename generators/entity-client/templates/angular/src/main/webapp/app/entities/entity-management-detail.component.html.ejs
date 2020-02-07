@@ -30,6 +30,7 @@
                     const fieldName = fields[idx].fieldName;
                     const fieldType = fields[idx].fieldType;
                     const fieldTypeBlobContent = fields[idx].fieldTypeBlobContent;
+                    const qrCode = fields[idx].qrCode;
                 _%>
                 <dt><span jhiTranslate="<%= i18nKeyPrefix %>.<%= fieldName %>"<% if (fields[idx].javadoc) { if (enableTranslation) { %> [ngbTooltip]="'<%= i18nKeyPrefix %>.help.<%= fieldName %>' | translate"<% } else { %> ngbTooltip="<%= fields[idx].javadoc %>"<% } } %>><%= fields[idx].fieldNameHumanized %></span></dt>
                 <dd>
@@ -48,7 +49,13 @@
                         {{ <%= entityInstance %>.<%= fieldName %>ContentType }}, {{ byteSize(<%= entityInstance %>.<%= fieldName %>) }}
                     </div>
                     <%_ } else { _%>
-                    <span>{{ <%= entityInstance %>.<%= fieldName %> }}</span>
+                      <%_ if (qrCode === 'no') { _%>
+                        <span>{{ <%= entityInstance %>.<%= fieldName %> }}</span>
+                        <%_ } else { _%>
+                          <ngx-qrcode qrc-element-type = "url" [qrc-value] = "<%= entityInstance %>.<%= fieldName %>">
+                            </ngx-qrcode>
+                          <%_ } _%>
+
                     <%_ } _%>
                 </dd>
                 <%_ } _%>
